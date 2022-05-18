@@ -50,3 +50,10 @@ const deleteTodo = async (req,res) => {
     const result = await Todo.findByIdAndDelete(req.params.id);
     res.status(200).json(result)
 }
+
+module.exports = {
+    getTodos,
+    setTodo,
+    updateTodo,
+    deleteTodo
+}
