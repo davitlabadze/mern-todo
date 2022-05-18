@@ -17,9 +17,10 @@ const getTodos = async (req,res) => {
  * @access  Public
  */
 
-const setTodo = async (req,res) => {
+ const setTodo = async (req,res) => {
     if(!req.body.text){
         res.status(400)
+        throw new Error('Please add a text field')
     }
 
     const todo = await Todo.create({

@@ -9,9 +9,17 @@ Content-Type: application/json
 }
 
 
-GET http://localhost:5000/api/todos/
+###
+
+PUT http://localhost:5000/api/todos/62854d5df4ed58f6d99b4f72
+Content-Type: application/json
+
+{
+    "text": "Get the butter"
+}
 
 ###
-DELETE http://localhost:5000/api/todos/6283b563c1ac776e18a21787
+
+DELETE http://localhost:5000/api/todos/628405737530ef799534284d
 
 
