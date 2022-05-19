@@ -1,7 +1,14 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    backgroundPosition: {
+      'left-1': '1rem',
+    },
+    extend: {
+      backgroundImage: {
+        task: "url('/src/components/task.svg')",
+      },
+    },
   },
   plugins: [],
 };
