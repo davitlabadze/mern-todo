@@ -19,12 +19,10 @@ To Do is a task management app that helps you stay organized and manage your dai
 
 ## `Prerequisites`
 
-### <a href="https://nodejs.org/en/" target="_blank"><img style="float:left; margin-right:10px" src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/> 
-  v16.13.0 
+### <a href="https://nodejs.org/en/" target="_blank"><img style="float:left; margin-right:10px" src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/> v16.13.0 and up
 </a> 
 
-### <a href="https://www.mongodb.com/" target="_blank"><img style="float:left; margin-right:10px" src="https://img.shields.io/badge/mongodb-339933?style=for-the-badge&logo=mongodb&logoColor=white"/>   
-db version v3.6.8 </a> 
+### <a href="https://www.mongodb.com/" target="_blank"><img style="float:left; margin-right:10px" src="https://img.shields.io/badge/mongodb-339933?style=for-the-badge&logo=mongodb&logoColor=white"/> db version v3.6.8 </a> 
 
 
 <a name="dependencies"></a>
