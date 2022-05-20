@@ -57,7 +57,7 @@ function App() {
             onChange={(e) => setText(e.target.value)}
           />
         </form>
-        <div className='container w-1/2 h-auto mx-auto mt-10 text-left bg-gray-700 rounded'>
+        <div className='container flex flex-col items-center w-1/2 mx-auto mt-10 overflow-y-scroll text-left bg-gray-700 rounded h-4/5'>
           {!isLoading &&
             todos.length > 0 &&
             todos.map((todo) => (
