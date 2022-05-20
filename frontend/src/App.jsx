@@ -1,10 +1,18 @@
-import TaskAction from './components/TaskAction';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import {
+  DotsHorizontalIcon,
+  PencilIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState('');
+  const [isOpen, toggleOpen] = useState(false);
+  const toggle = () => {
+    toggleOpen(!isOpen);
+  };
 
   useEffect(() => {
     getTodos();
@@ -43,6 +51,12 @@ function App() {
       });
   };
 
+  const deleteTodo = async (id) => {
+    await axios.delete(`todos/${id}`).then((res) => {
+      setTodos((todos) => todos.filter((todo) => todo._id !== res.data._id));
+    });
+  };
+
   return (
     <div className='flex h-screen bg-pink-500'>
       <div className='container w-1/2 h-auto mx-auto mt-20 mb-20 text-center bg-gray-700 rounded'>
@@ -66,7 +80,37 @@ function App() {
                 className='flex justify-between w-full p-4 text-gray-400 border border-transparent rounded hover:border-gray-600 hover:border h-14'
               >
                 <h1>{todo.text}</h1>
-                <TaskAction />
+
+                <div>
+                  <button onClick={toggle}>
+                    <DotsHorizontalIcon className='w-6 h-6 cursor-pointer' />
+                  </button>
+                  {isOpen ? (
+                    <ul className='absolute h-auto mt-5 -ml-12 text-gray-500 bg-gray-600 rounded-lg shadow-lg '>
+                      <li
+                        className='flex p-2 mt-2 mb-2 hover:text-gray-300'
+                        onClick={() => toggleOpen(false)}
+                      >
+                        <PencilIcon className='w-6 h-6 ' />
+                        <span className='ml-2 cursor-pointer text-md'>
+                          Edit
+                        </span>
+                      </li>
+                      <li
+                        className='flex p-2 mt-2 mb-2 hover:text-gray-300'
+                        onClick={() => toggleOpen(false)}
+                      >
+                        <TrashIcon className='w-6 h-6 ' />
+                        <span
+                          className='ml-2 cursor-pointer text-md'
+                          onClick={() => deleteTodo(todo._id)}
+                        >
+                          Delete
+                        </span>
+                      </li>
+                    </ul>
+                  ) : null}
+                </div>
               </div>
             ))}
           {!isLoading && todos.length === 0 && <h1>not yet todos</h1>}
