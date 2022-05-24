@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/outline';
 
 function TaskAction(props) {
-  const { deletetodo } = props;
+  const { deletetodo, editTodo } = props;
   const [isOpen, toggleOpen] = useState(false);
   const toggle = () => {
     toggleOpen(!isOpen);
@@ -24,7 +24,9 @@ function TaskAction(props) {
             onClick={() => toggleOpen(false)}
           >
             <PencilIcon className='w-6 h-6 ' />
-            <span className='ml-2 cursor-pointer text-md'>Edit</span>
+            <span className='ml-2 cursor-pointer text-md' onClick={editTodo}>
+              Edit
+            </span>
           </li>
           <li
             className='flex p-2 mt-2 mb-2 hover:text-gray-300'

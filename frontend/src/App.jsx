@@ -6,6 +6,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState('');
+  const [id, setId] = useState(null);
 
   useEffect(() => {
     getTodos();
@@ -32,17 +33,45 @@ function App() {
 
   const setTodo = async (e) => {
     e.preventDefault();
-    await axios
-      .post('todos', {
-        text: text,
-      })
-      .then(() => {
-        setText('');
-        getTodos();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await axios
+        .post('todos', {
+          text: text,
+        })
+        .then(() => {
+          setText('');
+          getTodos();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editTodo = (id) => {
+    const editText = todos.filter((todo) => todo._id === id);
+    setText(editText[0].text);
+    setId(editText[0]._id);
+  };
+
+  const updateTodo = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .put(`todos/${id}/`, {
+          text: text,
+        })
+        .then(() => {
+          setText('');
+          setId(null);
+          getTodos();
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const deleteTodo = async (id) => {
@@ -54,7 +83,7 @@ function App() {
   return (
     <div className='flex h-screen bg-pink-500'>
       <div className='container w-1/2 h-auto mx-auto mt-20 mb-20 text-center bg-gray-700 rounded'>
-        <form onSubmit={setTodo}>
+        <form onSubmit={id === null ? setTodo : updateTodo}>
           <input
             className='w-1/2 p-4 px-10 mt-10 bg-gray-800 bg-no-repeat border border-gray-900 rounded shadow-xl outline-none text-slate-100 bg-left-1 bg bg-task'
             type='text'
@@ -76,6 +105,7 @@ function App() {
                 <h1>{todo.text}</h1>
                 <TaskAction
                   key={todo._id}
+                  editTodo={() => editTodo(todo._id)}
                   deletetodo={() => deleteTodo(todo._id)}
                 />
               </div>
