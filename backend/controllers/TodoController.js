@@ -36,7 +36,13 @@ const getTodos = async (req,res) => {
  */
 
 const updateTodo = async (req,res) => {
-    const todo = await Todo.findById(req.params.id);
+    
+    const todo = await Todo.findByIdAndUpdate(
+        { _id: req.params.id },
+        { text: req.body.text }
+        );
+
+    
     todo.save()
     res.status(200).json(todo)
 }
