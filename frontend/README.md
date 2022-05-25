@@ -1,4 +1,3 @@
-# `Current application! This application is not yet complete `
 
 ## `Table of Contents`
 
