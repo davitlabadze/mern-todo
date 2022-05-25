@@ -80,6 +80,25 @@ function App() {
     });
   };
 
+  const completeTodo = async (id) => {
+    axios
+      .get(`todos/complete/${id}`)
+      .then(() => {
+        setTodos((todos) =>
+          todos.map((todo) => {
+            if (todo._id === todos._id) {
+              todo.complete = todos.complete;
+            }
+            return todo;
+          })
+        );
+        getTodos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className='flex h-screen bg-pink-500'>
       <div className='container w-1/2 h-auto mx-auto mt-20 mb-20 text-center bg-gray-700 rounded'>
@@ -100,11 +119,14 @@ function App() {
             todos.map((todo) => (
               <div
                 key={todo._id}
-                className='flex justify-between w-full p-4 text-gray-400 border border-transparent rounded hover:border-gray-600 hover:border h-14'
+                // eslint-disable-next-line prettier/prettier
+                className={`${todo.complete ? 'bg-pink-500' : ''} flex justify-between w-full p-4 mt-2 text-gray-400 border border-transparent rounded hover:border-gray-600 hover:border h-14`}
               >
                 <h1>{todo.text}</h1>
                 <TaskAction
                   key={todo._id}
+                  complete={todo.complete}
+                  completeTodo={() => completeTodo(todo._id)}
                   editTodo={() => editTodo(todo._id)}
                   deletetodo={() => deleteTodo(todo._id)}
                 />

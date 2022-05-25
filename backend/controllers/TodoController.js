@@ -58,9 +58,25 @@ const deleteTodo = async (req,res) => {
     res.status(200).json(result)
 }
 
+/**
+ * @desc    Complete todo
+ * @router  GET /api/todos/complete/:id
+ * @access  Public
+ */
+const completeTodo =  async (req, res) => {
+	const todo = await Todo.findById(req.params.id);
+
+	todo.complete = !todo.complete;
+
+	todo.save();
+
+	res.json(todo);
+}
+
 module.exports = {
     getTodos,
     setTodo,
     updateTodo,
-    deleteTodo
+    deleteTodo,
+    completeTodo
 }
