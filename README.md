@@ -75,7 +75,7 @@ Go to the frontend directory Use this command `cd ../frontend`
 
 #### `Copy .env file`
 ```bash
-cp .env.example .env
+cp .env.example .env.locale
 ```
 
 #### `Install Node modules`
